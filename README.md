@@ -1,6 +1,6 @@
 # RAG Search Engine
 
-A Python-based search engine project that implements keyword search functionality using an inverted index. This project allows users to build an index from movie data, search for movies, and calculate Term Frequency (TF) and Inverse Document Frequency (IDF) for specific terms.
+A Python-based search engine project that implements keyword search functionality from scratch using an inverted index. This project is built using lightweight, standard Python libraries to demonstrate foundational search concepts, intentionally avoiding high-level, out-of-the-box solutions like LangChain. It allows users to build an index from movie data, search for movies, and calculate Term Frequency (TF) and Inverse Document Frequency (IDF) for specific terms.
 
 ## Project Structure
 
