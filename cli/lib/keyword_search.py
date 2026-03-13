@@ -135,6 +135,18 @@ class InvertedIndex:
         term_doc_count = len(self.index[token])
         return math.log((doc_count + 1) / (term_doc_count + 1))
 
+    def get_tfidf(self, term: str, doc_id: int) -> float:
+#       calculate tf idf with TF-IDF = TF * IDF
+        tokens = tokenize_text(term)
+        if len(tokens) != 1:
+            raise ValueError("term must be a single token")
+        token = tokens[0]
+        idf = self.get_idf(term)
+        tf = self.get_tf(doc_id, token)
+        return tf * idf
+
+
+
 
 def build_command() -> None:
     """
@@ -246,3 +258,17 @@ def idf_command(term: str) -> float:
     idx = InvertedIndex()
     idx.load()
     return idx.get_idf(term)
+
+def tfidf_command(term: str, doc_id: int) -> float:
+    """
+    Command to get the IDF score of a term.
+
+    Args:
+        term: The term to query.
+
+    Returns:
+        The IDF score.
+    """
+    idx = InvertedIndex()
+    idx.load()
+    return idx.get_tfidf(term, doc_id)
