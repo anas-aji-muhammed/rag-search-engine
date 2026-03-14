@@ -1,16 +1,14 @@
-# RAG Search Engine
+# 🔍 Search Engine from Scratch
 
-A Python-based search engine project that implements keyword search functionality from scratch using an inverted index. This project is built using lightweight, standard Python libraries to demonstrate foundational search concepts, intentionally avoiding high-level, out-of-the-box solutions like LangChain. It allows users to build an index from movie data, search for movies, and calculate Term Frequency (TF) and Inverse Document Frequency (IDF) for specific terms.
+A Python-based search engine project demonstrating foundational search algorithms and data structures from the ground up.
 
-## Project Structure
+This project is built using lightweight, standard Python libraries to deeply understand how search engines work under the hood. It intentionally avoids high-level, out-of-the-box solutions (like LangChain or Elasticsearch) to expose the underlying math, data structures, and algorithms—from Inverted Indices and Okapi BM25 to Vector Embeddings and Reciprocal Rank Fusion.
+
+## 🗺️ Project Structure
 
 ```
 rag-search-engine/
-├── cli/
-│   ├── keyword_search_cli.py  # Main CLI entry point
-│   └── lib/
-│       ├── keyword_search.py  # Core search logic (InvertedIndex, TF, IDF)
-│       └── search_utils.py    # Utility functions (loading data, paths)
+├── Level1-keyword-search/ # Keyword search implementations
 ├── data/
 │   ├── movies.json            # Movie dataset
 │   └── stop_words.txt         # List of stop words to filter out
@@ -20,90 +18,19 @@ rag-search-engine/
 └── README.md                  # Project documentation
 ```
 
-## Features
+## 🚀 Level 1: [Keyword Search](./Level1-keyword-search) (Current Features)
 
 - **Inverted Index**: Efficiently maps terms to documents for fast retrieval.
 - **Keyword Search**: Search for movies based on keywords in their title or description.
 - **Term Frequency (TF)**: Calculate how frequently a term appears in a specific document.
-- **Inverse Document Frequency (IDF)**: Calculate the importance of a term across the entire corpus.
+- **Inverse Document Frequency (IDF)**: Calculates the importance of a term across the entire corpus.
+- **TF-IDF Score**: Compute the TF-IDF score to evaluate the relevance of a term to a specific document.
 - **Text Preprocessing**: Tokenization, stop word removal, and stemming (using PorterStemmer) are applied to text data.
+- **BM25 TF & IDF**: Implements components of the Okapi BM25 ranking function, including its variants of term frequency saturation and inverse document frequency.
+- **BM25 Search**: Ranks search results using the Okapi BM25 algorithm for improved relevance.
 
-## Installation
 
-1.  Clone the repository.
-2.  Install the required dependencies:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+## 🧠 Why Build This?
 
-3.  Download the movie dataset:
-    Download the file from `https://njhkxqi5evlbap1x.public.blob.vercel-storage.com/movies.json` and save it to `data/movies.json`.
-
-## Usage
-
-The project provides a Command Line Interface (CLI) to interact with the search engine.
-
-### 1. Build the Index
-
-Before searching or calculating statistics, you must build the inverted index. This processes the `data/movies.json` file and saves the index to the `cache/` directory.
-
-```bash
-python cli/keyword_search_cli.py build
-```
-
-### 2. Search for Movies
-
-Search for movies using a query string. The results will display the movie ID and title.
-
-```bash
-python cli/keyword_search_cli.py search "adventure movie"
-```
-
-### 3. Get Term Frequency (TF)
-
-Find out how many times a specific term appears in a document (identified by its ID).
-
-```bash
-python cli/keyword_search_cli.py tf <doc_id> <term>
-```
-
-Example:
-```bash
-python cli/keyword_search_cli.py tf 1 "action"
-```
-
-### 4. Get Inverse Document Frequency (IDF)
-
-Calculate the IDF score for a specific term, indicating its rarity across the dataset.
-
-```bash
-python cli/keyword_search_cli.py idf <term>
-```
-
-Example:
-```bash
-python cli/keyword_search_cli.py idf "rare_term"
-```
-
-## Key Components
-
-### `cli/lib/keyword_search.py`
-
-Contains the `InvertedIndex` class which handles:
--   `build()`: Constructs the index from movie data.
--   `save()` / `load()`: Persists the index to disk using `pickle`.
--   `get_documents()`: Retrieves documents matching a term.
--   `get_tf()` / `get_idf()`: Computes TF and IDF scores.
-
-Also includes text processing functions:
--   `tokenize_text()`: Splits text, removes stop words, and applies stemming.
--   `preprocess_text()`: Cleans text (lowercase, removes punctuation).
-
-### `cli/lib/search_utils.py`
-
-Helper functions for file handling and constant definitions (`CACHE_DIR`, `DATA_PATH`, etc.).
-
-### `cli/keyword_search_cli.py`
-
-The command-line interface wrapper that parses arguments and calls the appropriate functions from `keyword_search.py`.
+Modern AI tooling often treats search as a black box (e.g., simply calling `.as_retriever()` in LangChain). By building these algorithms from scratch, this project demystifies the search process. You learn *why* common words drown out rare words in basic TF, *how* BM25 penalizes excessively long documents, and eventually, *where* lexical search fails and semantic search thrives.
