@@ -218,3 +218,5 @@ When querying via CLI (e.g., `uv run cli/keyword_search_cli.py bm25search "anima
 2. (30) Day of the Animals - Score: 7.14
 3. (1043) Fantastic Mr. Fox - Score: 6.91
 ```
+[bm25_equation]: ./bm25.png
+![bm25_equation][bm25_equation]
